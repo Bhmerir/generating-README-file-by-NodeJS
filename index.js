@@ -35,6 +35,24 @@ const questions = [
         name: "installation",
         default: "npm i"
     },
+    {
+        type: "input",
+        message: "What command should be run to run tests? ",
+        name: "test",
+        default: "npm test"
+    },
+    {
+        type: "input",
+        message: "What does the user need to know about using the repo? ",
+        name: "usage",
+        default: "There is not any special Guideline!"
+    },
+    {
+        type: "input",
+        message: "What does the user need to know about contributing to the repo? ",
+        name: "contributing",
+        default: "There is not anyway to contribute in this application!"
+    }
 ];
 
 
@@ -47,24 +65,24 @@ function writeToFile(fileName, data) {
 
 function generateMDContent(response){
     console.log(response)
-    let readMeContent = `# ${response.projectName}\n\n## Description\n\n---\n\n${response.description}\n\n`;
+    let readMeContent = `# ${response.projectName}\n\n## Description\n\n---\n\n`;
+    if(response.license !== "NONE"){
+        //
+    }
+    readMeContent += `${response.description}\n\n`;
     readMeContent += `## Table of Contents\n\n* [Description](#description)\n\n* [Installation](#installation)\n\n`;
     readMeContent += `* [Usage](#usage)\n\n* [Credits](#credits)\n\n* [Contributing](#contributing)\n\n`;
-    if(response.license !== "NONE"){
-        readMeContent += `* [Tests](#tests)\n\n* [Questions](#questions)\n\n* [License](#license)\n\n`;
-    }
-    else{
-        readMeContent += `* [Tests](#tests)\n\n* [Questions](#questions)\n\n`; 
-    }
-    readMeContent += `## Installation\n\n---\n\nIn order to install this application, use below command:\n\n${response.installation}\n\n`;
-    readMeContent += `## Usage\n\n---\n\n`;
-    readMeContent += `## Credits\n\n---\n\n`;
-    readMeContent += `## Contributing\n\n---\n\n`;
-    readMeContent += `## Tests\n\n---\n\n`;
-    readMeContent += `## Questions\n\n---\n\n`;
-    if(response.license !== "NONE"){
-        readMeContent += `## License\n\n---\n\n${response.license}\n\n`;
-    }
+    
+    readMeContent += `* [Tests](#tests)\n\n* [Questions](#questions)\n\n* [License](#license)\n\n`;
+    readMeContent += `## Installation\n\n---\n\nIn order to install this application, use below command :\n\n${response.installation}\n\n`;
+    readMeContent += `## Usage\n\n---\n\nHere is the usage guideline :\n\n${response.usage}\n\n`;
+    readMeContent += `## Credits\n\n---\n\nMy GitHub Username: ${response.gitHubUsername})\n\n`;
+    readMeContent += `[My GitHub URL](https://github.com/${response.gitHubUsername})\n\n`;
+    readMeContent += `## Contributing\n\n---\n\nTo contribute in this application:\n\n${response.contributing}\n\n`;
+    readMeContent += `## Tests\n\n---\n\nIn order to run the test, use below command :\n\n${response.test}\n\n`;
+    readMeContent += `## Questions\n\n---\n\nIf you have any question, you can send me an email to:\n\n`;
+    readMeContent += `[My Email Address](mailto:(${response.email}))\n\n`;
+    readMeContent += `## License\n\n---\n\n${response.license}\n\n`;
     return readMeContent;
 }
 
