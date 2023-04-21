@@ -42,7 +42,7 @@ npm i
 
 This is a link to a video which instructs the users on how to work with software : 
 
-[Walk-through Video Link](https://drive.google.com/file/d/1NrSd1VNuGkQjaYP1lAGp2RcvphD_LScc/view)
+[Walk-through Video Link](https://drive.google.com/file/d/1eIm8vh2b5K8fObmj1TM07-Jq2-GFJ8Ov/view)
 
 <br>
 
