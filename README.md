@@ -44,9 +44,17 @@ This is a link to a video which instructs the users on how to work with software
 
 [Walk-through Video Link](https://drive.google.com/file/d/1NrSd1VNuGkQjaYP1lAGp2RcvphD_LScc/view)
 
-Here is an instance of the made README file by this project:
+<br>
+
+Here is the image of the resulting README file by this project:
 
 ![A Test generated README file](my-generated-README-file.png)
+
+<br>
+
+Here is the link of it:
+
+[Click the link here](https://github.com/Bhmerir/generating-README-file-by-NodeJS/blob/main/README-for-bhmerir.md)
 
 <br>
 
