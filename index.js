@@ -1,6 +1,7 @@
 const fs = require("fs");
 const inquirer = require('inquirer');
 
+//This array is consisting of all the questions.
 const questions = [
     {
         type: "input",
@@ -57,13 +58,14 @@ const questions = [
     }
 ];
 
-
+//This function writes the README content in README file
 function writeToFile(fileName, data) {
     fs.writeFile(fileName, data, (error)=>{
-        error ? console.error(error) : console.log("success!");
+        error ? console.error(error) : console.log(`README file is successfully made under name of ${fileName}!`);
     });
 }
 
+//This function is responsible to bring badge's picture for the chosen license
 function renderLicenseBadge(license){
     let shieldUrl = `https://img.shields.io/badge/license-`
     if(license === "MIT"){
@@ -86,6 +88,7 @@ function renderLicenseBadge(license){
     }
 }
 
+//This function provides a link to the site of opensource.org for each license that describes that specific license.
 function renderLicenseLink(license){
     if(license !== "NONE"){
         return `https://opensource.org/license/${license}`;
@@ -95,21 +98,19 @@ function renderLicenseLink(license){
     }
 }
 
+// This function generates the markdown content
 function generateMDContent(response){
-    console.log(response)
     let readMeContent = `# ${response.projectName}\n\n`;
+    //If a badge is selected, the image of that badge and a link to its description will be added to the README file
     if(response.license !== "NONE"){
         readMeContent += `[![${renderLicenseBadge(response.license)}](${renderLicenseBadge(response.license)})](${renderLicenseLink(response.license)})\n\n<br>\n\n`;
     }
     readMeContent += `## Description\n\n---\n\n${response.description}\n\n<br>\n\n`;
     readMeContent += `## Table of Contents\n\n---\n\n* [Description](#description)\n\n* [Installation](#installation)\n\n`;
- //   readMeContent += `* [Usage](#usage)\n\n* [Credits](#credits)\n\n* [Contributing](#contributing)\n\n`;
     readMeContent += `* [Usage](#usage)\n\n* [Contributing](#contributing)\n\n`;
     readMeContent += `* [Tests](#tests)\n\n* [Questions](#questions)\n\n* [License](#license)\n\n<br>\n\n`;
     readMeContent += `## Installation\n\n---\n\nIn order to install this application, use the below command :\n\n${response.installation}\n\n<br>\n\n`;
     readMeContent += `## Usage\n\n---\n\nHere is the application guideline :\n\n${response.usage}\n\n<br>\n\n`;
- //   readMeContent += `## Credits\n\n---\n\nMy GitHub Username : ${response.gitHubUsername}\n\n`;
- //   readMeContent += `[My GitHub URL](https://github.com/${response.gitHubUsername})\n\n`;
     readMeContent += `## Contributing\n\n---\n\nTo contribute to this application :\n\n${response.contributing}\n\n<br>\n\n`;
     readMeContent += `## Tests\n\n---\n\nIn order to run the test, use below command :\n\n${response.test}\n\n<br>\n\n`;
     readMeContent += `## Questions\n\n---\n\nIf you have any additional questions, you can send me an email to :\n\n`;
@@ -124,11 +125,12 @@ function generateMDContent(response){
     return readMeContent;
 }
 
+//This function handles the questions and send the responses to other functions to make the README file
 function init() {
     inquirer
         .prompt(questions)
         .then((response) => {
-            console.log(response)
+            console.log("Generating README file is in process...")
             let mdContent = generateMDContent(response);
             if(response.gitHubUsername !== ""){
                 writeToFile(`README-for-${response.gitHubUsername}.md`, mdContent);
@@ -138,4 +140,5 @@ function init() {
             }
         });
 }
+
 init();
